@@ -1,0 +1,71 @@
+*{
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.slide_wrap{
+  width: 200px;
+  height: 200px;
+  position: relative;
+  top: 200px;
+  left: 300px;
+  overflow: hidden;
+}
+ul.slides{  
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: 0;
+  left: 0;  
+}
+ul.slides.animate{
+  transition: 0.2s;
+}
+ul.slides li{
+  width: 200px;
+  height: 100px;
+}
+
+.button{
+  position: absolute;
+  top: 100px;
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+}
+.button div{
+  width: 40px;
+  height: 50px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.right{
+  border-left: 40px solid aqua;
+  border-bottom: 25px solid transparent;
+  border-top: 25px solid transparent;
+}
+.left{
+  border-right: 40px solid violet;
+  border-bottom: 25px solid transparent;
+  border-top: 25px solid transparent;
+}
+
+.paginaition{
+  position: absolute;
+  bottom: 0;
+  left: 50px;
+  width: 100px;
+}
+.paginaition ul{
+  display: flex;
+  justify-content: space-around;
+}
+.paginaition ul li{
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: gray;
+}
+.paginaition ul li.active{
+  background-color: black;
+}

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link href="test.css" rel="stylesheet">
+</head>
+<body>
+
+  <!--html-->
+  <div class="slide_wrap">
+    <ul class="slides">
+      <li style="background-color: red;"></li>
+      <li style="background-color: blue;"></li>
+      <li style="background-color: green;"></li>
+      <li style="background-color: yellow;"></li>
+    </ul>
+    <div class="button">
+      <div class="left" onclick="slidePrev();"></div>
+      <div class="right" onclick="slideNext();"></div>
+    </div>
+    <div class="paginaition">
+      <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    let currnet = 0;
+    const slides = document.querySelector('.slides'),
+          slide = document.querySelectorAll('.slides li'),          
+          slideCount = slide.length,
+          slideWidth = 200,
+          prevBtn = document.querySelector('left'),
+          nextBtn = document.querySelector('right'),
+          lastSlide = slide[0],
+          firstSlide = slide[slideCount-1],
+          dots = document.querySelector('.paginaition ul'),
+          dot = document.querySelectorAll('.paginaition ul li');
+          
+          makeClone();
+          function makeClone(){
+            const cloneFirst = firstSlide.cloneNode(true);
+            const cloneLast = lastSlide.cloneNode(true);
+            cloneFirst.classList.add('clone');
+            cloneLast.classList.add('clone');
+            slides.prepend(cloneFirst);
+            slides.appendChild(cloneLast);
+
+            //초기값
+            slides.style.transform = `translateX(-${slideWidth}px)`;
+            slides.classList.add('animate');
+            dot[0].classList.add('active');
+          }
+
+          function slidePrev(){
+            moveSlide(currnet-1);
+          }
+          function slideNext(){
+            moveSlide(currnet+1);
+          }
+          function moveSlide(num){
+            slides.style.left = -num*slideWidth+'px';
+            currnet = num
+            dot.forEach(function(v, i){
+              dot[i].classList.remove('active');
+            })            
+
+            if(currnet == slideCount){
+              currnet = 0;                
+              dot[currnet].classList.add('active');
+              setTimeout(function(){
+                slides.classList.remove('animate');
+                slides.style.left = '0px';                
+              },200)
+              setTimeout(function(){
+                slides.classList.add('animate');
+              },210)
+            }else if(currnet < 0){
+              currnet = slideCount-1;                
+              dot[currnet].classList.add('active');
+              setTimeout(function(){
+                slides.classList.remove('animate');
+                slides.style.left = -(slideCount-1)*slideWidth+'px';
+                
+              },200)
+              setTimeout(function(){
+                slides.classList.add('animate');
+              },210)
+            }else{
+              dot[currnet].classList.add('active');
+            }
+          }
+          setInterval(function(){
+            slideNext()
+          },1500)
+
+  </script>
+</body>
+</html>
